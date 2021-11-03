@@ -23,10 +23,20 @@ class Form extends React.Component {
         super(props);
         this.state = { shouldHide: true };
         this.onChange = this.onChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     onChange() {
         this.setState({ shouldHide: false });
+    }
+
+    handleClick(e) {
+        e.preventDefault();
+        if (document.querySelector('input:checked').value === this.props.randomQuote.movie) {
+            console.log('Correct');
+        } else {
+            console.log("Wrong");
+        }
     }
 
     render() {
@@ -38,7 +48,8 @@ class Form extends React.Component {
             <form>
                 <Question randomQuote={this.props.randomQuote.quote} />
                 {answerList}
-                <button className={this.state.shouldHide ? 'hidden' : undefined}>Submit Answer</button>
+                <button className={this.state.shouldHide ? 'hidden' : undefined}
+                        onClick={this.handleClick}>Submit Answer</button>
             </form>
         );
     }

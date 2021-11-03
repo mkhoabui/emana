@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/Header/Header';
 import Form from './components/Form/Form';
+import './index.css';
 
 const movieQuote = require("popular-movie-quotes");
 const numQuotes = 4;
