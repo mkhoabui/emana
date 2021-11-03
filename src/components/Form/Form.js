@@ -1,10 +1,11 @@
 import React from 'react';
 import Answer from '../Answer/Answer';
 import Question from '../Question/Question';
+import { nanoid } from 'nanoid';
 
 function Form(props) {
     const answerList = props.quotes.map(quote => (
-        <Answer movie={quote.movie} />
+        <Answer movie={quote.movie} id={"answer-" + nanoid()} />
     ));
     const randomQuote = props.quotes[Math.floor(Math.random() * 4)];
 
