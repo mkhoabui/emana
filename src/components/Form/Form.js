@@ -3,21 +3,6 @@ import Answer from '../Answer/Answer';
 import Question from '../Question/Question';
 import { nanoid } from 'nanoid';
 
-// function Form(props) {
-//     const answerList = props.quotes.map(quote => (
-//         <Answer movie={quote.movie} id={"answer-" + nanoid()} />
-//     ));
-//     const randomQuote = props.quotes[Math.floor(Math.random() * 4)];
-
-//     return (
-//         <form>
-//             <Question randomQuote={randomQuote.quote} />
-//             {answerList}
-//             <button>Submit Answer</button>
-//         </form>
-//     );
-// }
-
 class Form extends React.Component {
     constructor(props) {
         super(props);
@@ -32,24 +17,45 @@ class Form extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
-        if (document.querySelector('input:checked').value === this.props.randomQuote.movie) {
-            console.log('Correct');
-        } else {
-            console.log("Wrong");
+        if (e.target.id === 'submit') {
+            if (document.querySelector('input:checked').value === this.props.randomQuote.movie) {
+                this.props.incrementCountCorrect();
+            } else {
+                console.log("Wrong");
+            }
+
+            this.setState({ shouldHide: true });
+
+            document.querySelectorAll('input').forEach(input => {
+                input.disabled = true;
+            });
+
+        } else if (e.target.id === 'next') {
+            document.querySelectorAll('input').forEach(input => {
+                input.disabled = false;
+                input.checked = false;
+            });
+            this.props.incrementCountQuestion();
         }
     }
 
     render() {
         const answerList = this.props.quotes.map(quote => (
-            <Answer movie={quote.movie} id={"answer-" + nanoid()} onChange={this.onChange}  />
+            <Answer movie={quote.movie} id={"answer-" + nanoid()} onChange={this.onChange} />
         ));
 
         return (
             <form>
-                <Question randomQuote={this.props.randomQuote.quote} />
-                {answerList}
+                <fieldset>
+                    <Question randomQuote={this.props.randomQuote.quote} />
+                    {answerList}
+                </fieldset>
                 <button className={this.state.shouldHide ? 'hidden' : undefined}
-                        onClick={this.handleClick}>Submit Answer</button>
+                    onClick={this.handleClick}
+                    id="submit">Submit Answer</button>
+                <button className={this.state.shouldHide ? undefined : 'hidden'}
+                    onClick={this.handleClick}
+                    id="next">Next Question</button>
             </form>
         );
     }
