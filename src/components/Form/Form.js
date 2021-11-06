@@ -20,8 +20,6 @@ class Form extends React.Component {
         if (e.target.id === 'submit') {
             if (document.querySelector('input:checked').value === this.props.randomQuote.movie) {
                 this.props.incrementCountCorrect();
-            } else {
-                console.log("Wrong");
             }
 
             this.setState({ shouldHide: true });
@@ -39,10 +37,14 @@ class Form extends React.Component {
         }
     }
 
+
+
     render() {
-        const answerList = this.props.quotes.map(quote => (
-            <Answer movie={quote.movie} id={"answer-" + nanoid()} onChange={this.onChange} />
-        ));
+        const answerList = this.props.quotes.map(quote => {
+            const id = "answer-" + nanoid();
+            return <Answer movie={quote.movie} id={id} onChange={this.onChange}
+                key={id} />
+        });
 
         return (
             <form>

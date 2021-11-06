@@ -1,23 +1,8 @@
 import React from "react";
 import Form from "../Form/Form";
 import Score from "../Score/Score";
-
-const getQuotes = () => {
-    const movieQuote = require("popular-movie-quotes");
-    const numQuotes = 4;
-    const quotes = movieQuote.getSomeRandom(1);
-    const movies = [quotes[0].movie];
-    //prevent quotes from same movie
-    for (let i = 0; i < numQuotes - 1; i++) {
-        let nextQuote = movieQuote.getSomeRandom(1);
-        while (movies.includes(nextQuote[0].movie)) {
-            nextQuote = movieQuote.getSomeRandom(1);
-        }
-        quotes.push(nextQuote[0]);
-        movies.push(nextQuote[0].movie);
-    }
-    return quotes;
-};
+import Reward from '../Reward/Reward'
+import { getQuotes } from '../../functions';
 
 class Main extends React.Component {
     constructor(props) {
@@ -30,7 +15,8 @@ class Main extends React.Component {
             countCorrect: 0,
             countQuestion: 1,
             quotes: quotes,
-            randomQuote: randomQuote
+            randomQuote: randomQuote,
+            shouldHide: true
         };
 
         this.incrementCountCorrect = this.incrementCountCorrect.bind(this);
@@ -38,7 +24,13 @@ class Main extends React.Component {
     }
 
     incrementCountCorrect() {
-        this.setState({ countCorrect: this.state.countCorrect + 1 });
+        this.setState({ countCorrect: this.state.countCorrect + 1 }).then(() => {
+            console.log(this.state.countCorrect);
+            if (this.state.countCorrect % 2 === 0) {
+                this.setState({ shouldHide: false });
+            }
+        });
+
     }
 
     incrementCountQuestion() {
@@ -48,7 +40,8 @@ class Main extends React.Component {
         this.setState({
             countQuestion: this.state.countQuestion + 1,
             quotes: quotes,
-            randomQuote: randomQuote
+            randomQuote: randomQuote,
+            shouldHide: true
         });
 
     }
@@ -60,7 +53,10 @@ class Main extends React.Component {
                     randomQuote={this.state.randomQuote}
                     incrementCountCorrect={this.incrementCountCorrect}
                     incrementCountQuestion={this.incrementCountQuestion} />
-                <Score countCorrect={this.state.countCorrect} countQuestion={this.state.countQuestion} />
+                <Score countCorrect={this.state.countCorrect}
+                    countQuestion={this.state.countQuestion} />
+                <Reward countCorrect={this.state.countCorrect}
+                    shouldHide={this.state.shouldHide} />
             </>
         );
     }

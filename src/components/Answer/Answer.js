@@ -6,7 +6,7 @@ function Answer(props) {
     return (
         <div>
             <input type="radio" name="movie" id={props.id} onChange={handleChange} value={props.movie} />
-            <label for={props.id}>{props.movie}</label>
+            <label htmlFor={props.id}>{props.movie}</label>
         </div>
     );
 }
