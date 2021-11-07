@@ -16,12 +16,7 @@ export const getQuotes = () => {
 };
 
 export const getRewardImageSrc = async () => {
-    const response = await fetch('http://shibe.online/api/shibes');
+    const response = await fetch('https://api.thecatapi.com/v1/images/search');
     const json = await response.json();
-    const arr = JSON.parse(json);
-    console.log(arr[0]);
-    return arr[0];
+    return json[0].url;
 };
-
-getRewardImageSrc();
-

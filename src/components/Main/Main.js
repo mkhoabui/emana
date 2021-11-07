@@ -3,6 +3,7 @@ import Form from "../Form/Form";
 import Score from "../Score/Score";
 import Reward from '../Reward/Reward'
 import { getQuotes } from '../../functions';
+import { getRewardImageSrc } from '../../functions';
 
 class Main extends React.Component {
     constructor(props) {
@@ -16,7 +17,8 @@ class Main extends React.Component {
             countQuestion: 1,
             quotes: quotes,
             randomQuote: randomQuote,
-            shouldHide: true
+            shouldHide: true,
+            rewardImageSrc: ''
         };
 
         this.incrementCountCorrect = this.incrementCountCorrect.bind(this);
@@ -25,9 +27,14 @@ class Main extends React.Component {
 
     incrementCountCorrect() {
         this.setState({ countCorrect: this.state.countCorrect + 1 }, () => {
-            console.log(this.state.countCorrect);
-            if (this.state.countCorrect % 1 === 0) {
-                this.setState({ shouldHide: false });
+            if (this.state.countCorrect % 5 === 0) {
+                (async () => {
+                    const rewardImageSrc = await getRewardImageSrc();
+                    this.setState({
+                        shouldHide: false,
+                        rewardImageSrc: rewardImageSrc
+                    });
+                })();
             }
         });
 
@@ -56,7 +63,8 @@ class Main extends React.Component {
                 <Score countCorrect={this.state.countCorrect}
                     countQuestion={this.state.countQuestion} />
                 <Reward countCorrect={this.state.countCorrect}
-                    shouldHide={this.state.shouldHide} />
+                    shouldHide={this.state.shouldHide} 
+                    rewardImageSrc={this.state.rewardImageSrc} />
             </>
         );
     }
