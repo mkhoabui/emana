@@ -1,7 +1,6 @@
 import React from 'react';
 import Answer from '../Answer/Answer';
 import Question from '../Question/Question';
-import { nanoid } from 'nanoid';
 
 class Form extends React.Component {
     constructor(props) {
@@ -40,10 +39,9 @@ class Form extends React.Component {
 
 
     render() {
-        const answerList = this.props.quotes.map(quote => {
-            const id = "answer-" + nanoid();
-            return <Answer movie={quote.movie} id={id} onChange={this.onChange}
-                key={id} />
+        const answerList = this.props.quotes.map((quote, index) => {
+            return <Answer movie={quote.movie} id={"answer-" + index} onChange={this.onChange}
+                key={"answer-" + index} />
         });
 
         return (

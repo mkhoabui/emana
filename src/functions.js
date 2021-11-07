@@ -15,3 +15,13 @@ export const getQuotes = () => {
     return quotes;
 };
 
+export const getRewardImageSrc = async () => {
+    const response = await fetch('http://shibe.online/api/shibes');
+    const json = await response.json();
+    const arr = JSON.parse(json);
+    console.log(arr[0]);
+    return arr[0];
+};
+
+getRewardImageSrc();
+

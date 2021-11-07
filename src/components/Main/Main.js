@@ -24,9 +24,9 @@ class Main extends React.Component {
     }
 
     incrementCountCorrect() {
-        this.setState({ countCorrect: this.state.countCorrect + 1 }).then(() => {
+        this.setState({ countCorrect: this.state.countCorrect + 1 }, () => {
             console.log(this.state.countCorrect);
-            if (this.state.countCorrect % 2 === 0) {
+            if (this.state.countCorrect % 1 === 0) {
                 this.setState({ shouldHide: false });
             }
         });
