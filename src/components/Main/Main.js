@@ -28,6 +28,7 @@ class Main extends React.Component {
     incrementCountCorrect() {
         this.setState({ countCorrect: this.state.countCorrect + 1 }, () => {
             if (this.state.countCorrect % 5 === 0) {
+                // showing reward image from api call
                 (async () => {
                     const rewardImageSrc = await getRewardImageSrc();
                     this.setState({

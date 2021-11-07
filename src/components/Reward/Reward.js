@@ -1,4 +1,3 @@
-
 function Reward(props) {
     return (
         <div className={props.shouldHide ? 'hidden' : undefined}>
