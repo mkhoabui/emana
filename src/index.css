@@ -1,3 +1,35 @@
 .hidden {
   display: none;
 }
+
+header {
+  text-align: center;
+}
+
+form {
+  margin: auto;
+  width: 50%;
+}
+
+legend {
+  font-size: 1.5em;
+}
+
+button {
+  margin-top: .5em;
+}
+
+.score {
+  font-size: 3em;
+  position: absolute;
+  bottom: 9.5em;
+  left: 3em;
+}
+
+.correct {
+  color: green;
+}
+
+img {
+  max-width: 100%;
+}

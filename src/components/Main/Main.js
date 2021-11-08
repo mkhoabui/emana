@@ -1,7 +1,6 @@
 import React from "react";
 import Form from "../Form/Form";
 import Score from "../Score/Score";
-import Reward from '../Reward/Reward'
 import { getQuotes } from '../../functions';
 import { getRewardImageSrc } from '../../functions';
 
@@ -38,7 +37,6 @@ class Main extends React.Component {
                 })();
             }
         });
-
     }
 
     incrementCountQuestion() {
@@ -51,7 +49,6 @@ class Main extends React.Component {
             randomQuote: randomQuote,
             shouldHide: true
         });
-
     }
 
     render() {
@@ -60,12 +57,12 @@ class Main extends React.Component {
                 <Form quotes={this.state.quotes}
                     randomQuote={this.state.randomQuote}
                     incrementCountCorrect={this.incrementCountCorrect}
-                    incrementCountQuestion={this.incrementCountQuestion} />
+                    incrementCountQuestion={this.incrementCountQuestion}
+                    countCorrect={this.state.countCorrect}
+                    shouldHide={this.state.shouldHide}
+                    rewardImageSrc={this.state.rewardImageSrc} />
                 <Score countCorrect={this.state.countCorrect}
                     countQuestion={this.state.countQuestion} />
-                <Reward countCorrect={this.state.countCorrect}
-                    shouldHide={this.state.shouldHide} 
-                    rewardImageSrc={this.state.rewardImageSrc} />
             </>
         );
     }

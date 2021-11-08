@@ -1,6 +1,7 @@
 import React from 'react';
 import Answer from '../Answer/Answer';
 import Question from '../Question/Question';
+import Reward from '../Reward/Reward';
 
 class Form extends React.Component {
     constructor(props) {
@@ -50,10 +51,14 @@ class Form extends React.Component {
                     <Question randomQuote={this.props.randomQuote.quote} />
                     {answerList}
                 </fieldset>
-                <button className={this.state.shouldHide ? 'hidden' : undefined}
+                <Reward countCorrect={this.props.countCorrect}
+                    shouldHide={this.props.shouldHide}
+                    rewardImageSrc={this.props.rewardImageSrc} />
+                <button className={this.state.shouldHide ? 'hidden' : 'btn btn-primary'}
                     onClick={this.handleClick}
-                    id="submit">Submit Answer</button>
-                <button className={this.state.shouldHide ? undefined : 'hidden'}
+                    id="submit"
+                    type="button">Submit Answer</button>
+                <button className={this.state.shouldHide ? 'btn btn-primary' : 'hidden'}
                     onClick={this.handleClick}
                     id="next">Next Question</button>
             </form>

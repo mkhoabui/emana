@@ -1,6 +1,6 @@
 function Score(props) {
     return (
-        <div>{props.countCorrect}/{props.countQuestion}</div>
+        <div className="score"><span className="correct">{props.countCorrect}</span>/{props.countQuestion}</div>
     );
 }
 
