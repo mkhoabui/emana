@@ -33,3 +33,7 @@ button {
 img {
   max-width: 100%;
 }
+
+body {
+  background-color: #c1c2d4;
+}
